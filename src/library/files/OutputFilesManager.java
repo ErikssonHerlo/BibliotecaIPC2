@@ -16,10 +16,6 @@ import library.Book;
  * @author zofia
  */
 public class OutputFilesManager {
-    private static final String BOOK_DIRECTORY_PATH = "Book/";
-    private static final String BOOK_EXTENSION = ".book";
-    private static final String DOT = ".";
-    private static final String SLASH = "/";
     
     public void createDirectory(String path) {
         File file = new File(path);

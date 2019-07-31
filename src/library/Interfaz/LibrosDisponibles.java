@@ -5,17 +5,30 @@
  */
 package library.Interfaz;
 
+import java.util.ArrayList;
+import java.util.List;
+import library.Book;
+import library.BookManager;
+import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.observablecollections.ObservableList;
+
 /**
  *
  * @author erikssonherlo
  */
 public class LibrosDisponibles extends javax.swing.JFrame {
-
+    private BookManager bookManager;
+    private List<Book> list;
+    private ObservableList<Book> bookList;
     /**
      * Creates new form LibrosDisponibles
      */
     public LibrosDisponibles() {
+        bookManager = new BookManager();
+        this.list = new ArrayList<>();
+        this.bookList = ObservableCollections.observableList(list);
         initComponents();
+        refreshObservableList(bookManager.obtainBooks());
     }
 
     /**
@@ -26,6 +39,7 @@ public class LibrosDisponibles extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         Agregar = new javax.swing.JButton();
         Regresar = new javax.swing.JButton();
@@ -70,50 +84,31 @@ public class LibrosDisponibles extends javax.swing.JFrame {
         Titulo.setText("Libros Disponibles");
         getContentPane().add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, 53));
 
-        TablaLibrosDisponibles.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "No.", "Código", "Nombre", "Autor", "Fecha de Publicación", "Editorial"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bookList}");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, TablaLibrosDisponibles);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${code}"));
+        columnBinding.setColumnName("Codigo");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${autor}"));
+        columnBinding.setColumnName("Autor");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
+        columnBinding.setColumnName("Titulo");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${editorial}"));
+        columnBinding.setColumnName("Editorial");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${availableQuantity}"));
+        columnBinding.setColumnName("Cantidad Disponible");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
         jScrollPane2.setViewportView(TablaLibrosDisponibles);
-        if (TablaLibrosDisponibles.getColumnModel().getColumnCount() > 0) {
-            TablaLibrosDisponibles.getColumnModel().getColumn(0).setHeaderValue("No.");
-            TablaLibrosDisponibles.getColumnModel().getColumn(1).setHeaderValue("Código");
-            TablaLibrosDisponibles.getColumnModel().getColumn(2).setHeaderValue("Nombre");
-            TablaLibrosDisponibles.getColumnModel().getColumn(3).setHeaderValue("Autor");
-            TablaLibrosDisponibles.getColumnModel().getColumn(4).setHeaderValue("Fecha de Publicación");
-            TablaLibrosDisponibles.getColumnModel().getColumn(5).setHeaderValue("Editorial");
-        }
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 890, 390));
 
@@ -121,6 +116,8 @@ public class LibrosDisponibles extends javax.swing.JFrame {
         Fondo.setMaximumSize(new java.awt.Dimension(940, 526));
         Fondo.setMinimumSize(new java.awt.Dimension(940, 526));
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 610));
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,6 +142,18 @@ public class LibrosDisponibles extends javax.swing.JFrame {
         this.setVisible(false); 
     }//GEN-LAST:event_PrestarActionPerformed
 
+    public void refreshObservableList(List<Book> list) {
+        this.bookList.clear();
+        this.bookList.addAll(list);
+    }
+
+    public ObservableList<Book> getBookList() {
+        return bookList;
+    }
+    
+    public void setBookListObservable(ObservableList<Book> bookList) {
+        this.bookList = bookList;
+    }
     /**
      * @param args the command line arguments
      */
@@ -188,5 +197,6 @@ public class LibrosDisponibles extends javax.swing.JFrame {
     private javax.swing.JTable TablaLibrosDisponibles;
     private javax.swing.JLabel Titulo;
     private javax.swing.JScrollPane jScrollPane2;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

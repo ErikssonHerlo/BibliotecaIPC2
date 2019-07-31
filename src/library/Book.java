@@ -30,12 +30,13 @@ public class Book implements Serializable{
         this.availableQuantity = availableQuantity;
     }
 
-    public Book(String title, String autor, String code, int availableQuantity, String date) {
+    public Book(String title, String autor, String code, int availableQuantity, String date, String editorial) {
         this.title = title;
         this.autor = autor;
         this.code = code;
         this.availableQuantity = availableQuantity;
         this.publicationDate = validateDate(date);
+        this.editorial = editorial;
     }
     
     public LocalDate validateDate(String date) throws DateTimeParseException {
