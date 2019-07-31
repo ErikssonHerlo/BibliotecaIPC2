@@ -16,7 +16,7 @@ public class StudentManager {
     private int careerCode = 0;
     private Student student;
     
-    public void findStudentData(String line, int flag) throws Exception{
+    public Student findStudentData(String line, int flag) throws Exception{
         String[] data = line.split(":");
         if(data[0].startsWith("CARNET")) {
             exceptions.determinateEmptyField(line, "CARNET");
@@ -28,14 +28,15 @@ public class StudentManager {
             exceptions.determinateValidCode(data[1]);
             careerCode = Integer.valueOf(data[1]);
         }
-        fillStudentData(flag);
+        return fillStudentData(flag);
     }
     
-    public void fillStudentData(int flag) {
+    public Student fillStudentData(int flag) {
         if(this.studentId != null && this.name != null && this.careerCode != 0) {
             student = new Student(studentId, name, careerCode);
             restartData(flag);
         }
+        return this.student;
     }
     
     public void restartData(int flag) {

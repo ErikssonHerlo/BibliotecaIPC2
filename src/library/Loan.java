@@ -5,6 +5,7 @@
  */
 package library;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,11 +14,11 @@ import java.time.format.DateTimeParseException;
  *
  * @author zofia
  */
-public class Loan {
+public class Loan implements Serializable {
     private String bookCode;
     private String studentId;
     private LocalDate loanDate;
-    private static final String DATE_PATTERN = "yyyy/MM/dd"; //Pattern para fecha.
+    private static final String DATE_PATTERN = "yyyy-MM-dd"; //Pattern para fecha.
 
     public Loan(String bookCode, String studentId, String loanDate) {
         this.bookCode = bookCode;

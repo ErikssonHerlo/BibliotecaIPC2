@@ -15,6 +15,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import library.Book;
 import library.BookManager;
+import library.Loan;
+import library.LoanManager;
+import library.Student;
 import library.StudentManager;
 
 /**
@@ -29,9 +32,12 @@ public class InputFilesManager {
     private FileReader reader = null;
     private BufferedReader buffer = null;
     private Book book;
+    private Student student;
+    private Loan loan;
     private BookManager bookManager = new BookManager();
     private StudentManager studentManager = new StudentManager();
     private OutputFilesManager outputFiles = new OutputFilesManager();
+    private LoanManager loanManager = new LoanManager();
     private static final String BOOK = "LIBRO";
     private static final String STUDENT = "ESTUDIANTE";
     private static final String LOAN = "PRESTAMO";
@@ -84,13 +90,25 @@ public class InputFilesManager {
                 case 1:
                     this.book = bookManager.findBookData(line, this.flag);
                     if(this.book.getCode() != null && this.book.getAvailableQuantity() > -1) {
-                        outputFiles.createFiles("Book/", book.getCode(), ".book", this.book);
+                        Object object = this.book;
+                        outputFiles.createFiles("Book/", book.getCode(), ".book", object);
                     }
                 break;
                 case 2:
-                    studentManager.findStudentData(line, this.flag);
+                    this.student = studentManager.findStudentData(line, this.flag);
+                    if(this.student.getName() != null && this.student.getCareerCode() != 0) {
+                        Object object = this.student;
+                        outputFiles.createFiles("Student/", this.student.getId(), ".student", object);
+                    }
                 break;
                 case 3:
+                    this.loan = loanManager.findLoanData(line, this.flag);
+                    if(this.loan.getBookCode() != null && this.loan.getLoanDate() != null 
+                            && this.loan.getStudentId() != null) {
+                        Object object = this.loan;
+                        outputFiles.createFiles("Loan/", this.loan.getStudentId() + " " + this.loan.getBookCode(), 
+                                ".loan", object);
+                    }
                 break;
             }
         } catch(Exception e) {

@@ -29,12 +29,12 @@ public class OutputFilesManager {
         }
     }
     
-    public void createFiles(String directory, String path, String extension, Book book) {
+    public void createFiles(String directory, String path, String extension, Object object) {
         createDirectory(directory);
         File file = new File(directory + path + extension);
             try(FileOutputStream output = new FileOutputStream(file);
                 ObjectOutputStream outputStream = new ObjectOutputStream(output);) {
-                outputStream.writeObject(book); //aqui esta el error :/
+                outputStream.writeObject(object); 
             } catch(IOException e) {
                 System.out.println("Error: " + e.getMessage());
             } 

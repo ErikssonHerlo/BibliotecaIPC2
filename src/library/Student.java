@@ -5,6 +5,7 @@
  */
 package library;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,7 +14,7 @@ import java.time.format.DateTimeParseException;
  *
  * @author zofia
  */
-public class Student {
+public class Student implements Serializable {
     private String id;
     private String name;
     private int careerCode;
