@@ -16,17 +16,17 @@ import java.time.format.DateTimeParseException;
 public class Student {
     private String id;
     private String name;
-    private String careerCode;
+    private int careerCode;
     private LocalDate bornDate;
     private static final String DATE_PATTERN = "yyyy/MM/dd"; //Pattern para fecha.
 
-    public Student(String id, String name, String careerCode) {
+    public Student(String id, String name, int careerCode) {
         this.id = id;
         this.name = name;
         this.careerCode = careerCode;
     }
 
-    public Student(String id, String name, String careerCode, String bornDate) {
+    public Student(String id, String name, int careerCode, String bornDate) {
         this.id = id;
         this.name = name;
         this.careerCode = careerCode;
@@ -55,11 +55,11 @@ public class Student {
         this.name = name;
     }
 
-    public String getCareerCode() {
+    public int getCareerCode() {
         return careerCode;
     }
 
-    public void setCareerCode(String careerCode) {
+    public void setCareerCode(int careerCode) {
         this.careerCode = careerCode;
     }
 

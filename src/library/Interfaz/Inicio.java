@@ -5,19 +5,21 @@
  */
 package library.Interfaz;
 
+
 /**
  *
  * @author erikssonherlo
  */
 public class Inicio extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form Inicio
      */
     public Inicio() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,6 +30,7 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         Titulo = new javax.swing.JLabel();
+        AgregarArchivo = new javax.swing.JButton();
         Libros = new javax.swing.JButton();
         Estudiantes = new javax.swing.JButton();
         Prestamos = new javax.swing.JButton();
@@ -44,6 +47,15 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, 53));
         Titulo.getAccessibleContext().setAccessibleName("Titulo");
 
+        AgregarArchivo.setFont(new java.awt.Font("DejaVu Serif Condensed", 1, 15)); // NOI18N
+        AgregarArchivo.setText("Cargar Archivo");
+        AgregarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarArchivoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AgregarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 310, 40));
+
         Libros.setFont(new java.awt.Font("DejaVu Serif Condensed", 1, 15)); // NOI18N
         Libros.setText("Libros Disponibles");
         Libros.addActionListener(new java.awt.event.ActionListener() {
@@ -51,7 +63,7 @@ public class Inicio extends javax.swing.JFrame {
                 LibrosActionPerformed(evt);
             }
         });
-        getContentPane().add(Libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 310, 40));
+        getContentPane().add(Libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 310, 40));
 
         Estudiantes.setFont(new java.awt.Font("DejaVu Serif Condensed", 1, 15)); // NOI18N
         Estudiantes.setText("Estudiantes Registrados");
@@ -60,7 +72,7 @@ public class Inicio extends javax.swing.JFrame {
                 EstudiantesActionPerformed(evt);
             }
         });
-        getContentPane().add(Estudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 310, 40));
+        getContentPane().add(Estudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 310, 40));
 
         Prestamos.setFont(new java.awt.Font("DejaVu Serif Condensed", 1, 15)); // NOI18N
         Prestamos.setText("Registro de Prestamos");
@@ -69,7 +81,7 @@ public class Inicio extends javax.swing.JFrame {
                 PrestamosActionPerformed(evt);
             }
         });
-        getContentPane().add(Prestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 310, 40));
+        getContentPane().add(Prestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 310, 40));
 
         Salir.setFont(new java.awt.Font("DejaVu Serif Condensed", 1, 15)); // NOI18N
         Salir.setText("Salir");
@@ -78,7 +90,7 @@ public class Inicio extends javax.swing.JFrame {
                 SalirActionPerformed(evt);
             }
         });
-        getContentPane().add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 310, 40));
+        getContentPane().add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 310, 40));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library/Interfaz/library.jpeg"))); // NOI18N
         Fondo.setMaximumSize(new java.awt.Dimension(800, 467));
@@ -112,42 +124,23 @@ public class Inicio extends javax.swing.JFrame {
         this.setVisible(false); 
     }//GEN-LAST:event_PrestamosActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void AgregarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarArchivoActionPerformed
+        // TODO add your handling code here:
+        NuevoTexto Agregar = new NuevoTexto();
+        Agregar.setVisible(true);
+        this.setVisible(false);
+  
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+      public static void main(String args[]) {
+          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Inicio().setVisible(true);
             }
-        });
-    }
+});
+    }//GEN-LAST:event_AgregarArchivoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarArchivo;
     private javax.swing.JButton Estudiantes;
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton Libros;

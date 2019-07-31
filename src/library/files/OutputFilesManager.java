@@ -5,10 +5,38 @@
  */
 package library.files;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import library.Book;
+
 /**
  *
  * @author zofia
  */
 public class OutputFilesManager {
+    private static final String BOOK_DIRECTORY_PATH = "Book/";
+    private static final String BOOK_EXTENSION = ".book";
+    private static final String DOT = ".";
+    private static final String SLASH = "/";
     
+    public void createDirectory(String path) {
+        File file = new File(path);
+        if(file.exists() && file.isDirectory()) {
+        } else {
+            file.mkdirs();
+        }
+    }
+    
+    public void createFiles(String directory, String path, String extension, Book book) {
+        createDirectory(directory);
+        File file = new File(directory + path + extension);
+            try(FileOutputStream output = new FileOutputStream(file);
+                ObjectOutputStream outputStream = new ObjectOutputStream(output);) {
+                outputStream.writeObject(book); //aqui esta el error :/
+            } catch(IOException e) {
+                System.out.println("Error: " + e.getMessage());
+            } 
+    }
 }
